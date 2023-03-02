@@ -1,7 +1,8 @@
-ipywidgets
-notebook
-ensure
+ipywidgets==8.0.4
+notebook==6.5.2
+ensure==1.0.2
 opencv-python
-pandas
-nump
+pandas==1.5.2
+numpy==1.21.0
+
 -e .

@@ -1,13 +1,15 @@
-ipywidgets
-notebook
-ensure
+ipywidgets==8.0.4
+notebook==6.5.2
+ensure==1.0.2
 opencv-python
-pandas
-numpy
+pandas==1.5.2
+numpy==1.21.0
 
 #Dev requirements
-pytest
-tox
-black
-flake8
-mypy
+pytest==7.2.1
+tox==4.4.6
+black==23.1.0
+flake8==6.0.0
+mypy==1.0.1
+
+-e .

@@ -4,3 +4,4 @@ ensure
 opencv-python
 pandas
 nump
+-e .

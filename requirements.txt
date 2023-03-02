@@ -1,0 +1,6 @@
+ipywidgets
+notebook
+ensure
+opencv-python
+pandas
+nump

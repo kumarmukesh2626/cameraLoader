@@ -6,6 +6,7 @@ import pandas as pd
 from queue import Queue
 from threading import Thread
 import cv2
+import configparser
 from collections import deque
 from cameraLoader.fetch_config_values import MyParser
 import config.config_log as cf
@@ -30,18 +31,20 @@ class CameraLoader:
     """
 
     def __init__(self, config_file_path):
-        self.config = MyParser()
-        self.config.read(config_file_path)
-        self.log_path = self.config["LOG Related"]["LOG_FILE_PATH"]
-        self.config_setting = self.config.as_dict()
+        try:
+            self.config = MyParser()
+            self.config.read(config_file_path)
+            self.config_setting = self.config.as_dict()
+        except Exception as e:
+            print(e)
         self.video_objects = {}
         for cam in self.config_setting.keys():
             if 'rtsp' not in self.config_setting[cam]:
-                cf.error_log(400, "Rtsp link not found for camera", "CameraLoader", self.log_path)
+                cf.error_log(400, "Rtsp link not found for camera", "CameraLoader", path)
                 print(f"rtsp link not found for camera {cam}")
                 continue
             try:
-                cf.success_log(200, "Reading the Video Capture", "CameraLoader", self.log_path)
+                cf.success_log(200, "Reading the Video Capture", "CameraLoader", path)
                 cap = cv2.VideoCapture(self.config_setting[cam]['rtsp'])
                 if cap.isOpened():
                     try:
@@ -51,11 +54,11 @@ class CameraLoader:
                                    "size": (int(cap.get(3)), int(cap.get(4))),
                                    "capture_obj": cap}
                     except KeyError as e:
-                        cf.error_log(400, "Missing camrea Property", "CameraLoader", self.log_path)
+                        cf.error_log(400, "Missing camrea Property", "CameraLoader", path)
                         print(f"Missing property {e} for camera {cam}")
                     self.video_objects[cap_obj["cameraID"]] = cap_obj
             except Exception as e:
-                cf.error_log(400, "Error in Opening Camera", "CameraLoader", self.log_path)
+                cf.error_log(400, "Error in Opening Camera", "CameraLoader", path)
                 print(f"Error opening camera: {e}")
 
         self.frame_set = {}
@@ -73,7 +76,7 @@ class CameraLoader:
         while not self.stopped:
             for cap_obj in self.video_objects.values():
                 try:
-                    cf.success_log(200, "Reading the capture object", "CameraLoader", self.log_path)
+                    cf.success_log(200, "Reading the capture object", "CameraLoader", path)
                     ret, frame = cap_obj["capture_obj"].read()
                     if ret:
                         self.frame_set[cap_obj["cameraID"]].append(frame)
@@ -84,6 +87,12 @@ class CameraLoader:
     def stop(self):
         self.stopped = True
 
+
+
+
+config_Url = configparser.ConfigParser()
+config_Url.read('/home/shivam/Desktop/cameraLoader/src/config/common_config.ini')
+path = config_Url["LOGS"]["log_path"]
 
 '''
 how to run code

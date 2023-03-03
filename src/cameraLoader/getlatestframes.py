@@ -44,6 +44,7 @@ class CameraLoader:
                 print(f"rtsp link not found for camera {cam}")
                 continue
             try:
+                print("reading the frames")
                 cf.success_log(200, "Reading the Video Capture", "CameraLoader", path)
                 cap = cv2.VideoCapture(self.config_setting[cam]['rtsp'])
                 if cap.isOpened():
@@ -93,6 +94,7 @@ class CameraLoader:
 config_Url = configparser.ConfigParser()
 config_Url.read('/home/shivam/Desktop/cameraLoader/src/config/common_config.ini')
 path = config_Url["LOGS"]["log_path"]
+
 
 '''
 how to run code

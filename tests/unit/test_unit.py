@@ -44,7 +44,7 @@ class TestCameraLoader:
     # Test case for initialization failure with invalid configuration file path
     def test_init_failure(self):
         # Initialize the CameraLoader with an invalid configuration file path
-        with pytest.raises(OSError):
+        with pytest.raises(FileNotFoundError):
             loader = CameraLoader("non_existent_config_file.ini")
 
     

@@ -92,7 +92,7 @@ class CameraLoader:
 
 
 config_Url = configparser.ConfigParser()
-config_Url.read('/home/shivam/Desktop/cameraLoader/src/config/common_config.ini')
+config_Url.read('src/cameraLoader/logs')
 path = config_Url["LOGS"]["log_path"]
 
 

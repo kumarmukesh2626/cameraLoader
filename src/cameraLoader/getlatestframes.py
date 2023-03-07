@@ -9,7 +9,7 @@ import cv2
 import configparser
 from collections import deque
 from cameraLoader.fetch_config_values import MyParser
-import config.config_log as cf
+import cameraLoader.config_log as cf
 from ensure import ensure_annotations
 
 

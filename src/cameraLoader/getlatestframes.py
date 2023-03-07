@@ -71,6 +71,7 @@ class CameraLoader:
     def start(self):
         Thread(target=self.get, args=()).start()
         return self
+    
 
     @ensure_annotations
     def get(self):

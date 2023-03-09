@@ -5,9 +5,9 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 __version__ = "0.0.1"
 
-REPO_NAME = "cameraLoader"
+REPO_NAME = "testing_modules"
 AUTHOR_USER_NAME = "kumarmukesh2626"
-SRC_REPO = "cameraLoader"
+SRC_REPO = "testing_modules"
 AUTHOR_EMAIL = "mukesh.kumar@algo8.ai"
 
 setuptools.setup(

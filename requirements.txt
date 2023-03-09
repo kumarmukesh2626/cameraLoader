@@ -5,4 +5,6 @@ opencv-python
 pandas
 numpy==1.21.0
 imutils==0.5.4
+types-waitress
+types-requests
 -e .

@@ -5,11 +5,15 @@ opencv-python
 pandas
 numpy==1.21.0
 imutils==0.5.4
+types-waitress
+types-requests
+
 #Dev requirements
 pytest==7.2.1
 tox==4.4.6
 black==23.1.0
 # flake8==6.0.0
 mypy==1.0.1
+
 
 -e .

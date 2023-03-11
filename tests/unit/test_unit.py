@@ -1,6 +1,7 @@
 import pytest
 from cameraLoader.getlatestframes import CameraLoader
 import unittest
+import configparser
 import time
 
 def test_empty():

@@ -11,6 +11,15 @@ from collections import deque
 from cameraLoader.fetch_config_values import MyParser
 import cameraLoader.config_log as cf
 from ensure import ensure_annotations
+import os
+
+# Get the absolute path of the current file
+file_path = os.path.abspath(__file__)
+# Construct the relative path to the logs directory
+logs_dir = os.path.join(os.path.dirname(os.path.dirname(file_path)), 'logs')
+# Construct the relative path to the config directory
+config_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(file_path))), 'src', 'cameraLoader', 'config')
+print(config_dir)
 
 
 class CameraLoader:
@@ -40,12 +49,12 @@ class CameraLoader:
         self.video_objects = {}
         for cam in self.config_setting.keys():
             if 'rtsp' not in self.config_setting[cam]:
-                cf.error_log(400, "Rtsp link not found for camera", "CameraLoader", path)
+                # cf.error_log(400, "Rtsp link not found for camera", "CameraLoader", path)
                 print(f"rtsp link not found for camera {cam}")
                 continue
             try:
                 print("reading the frames")
-                cf.success_log(200, "Reading the Video Capture", "CameraLoader", path)
+                # cf.success_log(200, "Reading the Video Capture", "CameraLoader", path)
                 cap = cv2.VideoCapture(self.config_setting[cam]['rtsp'])
                 if cap.isOpened():
                     try:
@@ -55,11 +64,11 @@ class CameraLoader:
                                    "size": (int(cap.get(3)), int(cap.get(4))),
                                    "capture_obj": cap}
                     except KeyError as e:
-                        cf.error_log(400, "Missing camrea Property", "CameraLoader", path)
+                        # cf.error_log(400, "Missing camrea Property", "CameraLoader", path)
                         print(f"Missing property {e} for camera {cam}")
                     self.video_objects[cap_obj["cameraID"]] = cap_obj
             except Exception as e:
-                cf.error_log(400, "Error in Opening Camera", "CameraLoader", path)
+                # cf.error_log(400, "Error in Opening Camera", "CameraLoader", path)
                 print(f"Error opening camera: {e}")
 
         self.frame_set = {}
@@ -78,7 +87,7 @@ class CameraLoader:
         while not self.stopped:
             for cap_obj in self.video_objects.values():
                 try:
-                    cf.success_log(200, "Reading the capture object", "CameraLoader", path)
+                    # cf.success_log(200, "Reading the capture object", "CameraLoader", path)
                     ret, frame = cap_obj["capture_obj"].read()
                     if ret:
                         self.frame_set[cap_obj["cameraID"]].append(frame)
@@ -92,9 +101,12 @@ class CameraLoader:
 
 
 
-config_Url = configparser.ConfigParser()
-config_Url.read('config/common_config.ini')
-path = config_Url["LOGS"]["log_path"]
+# config_Url = configparser.ConfigParser()
+# config_Url.read(os.path.join(config_dir, "common_config.ini"))
+# print(config_Url.sections())
+# path = config_Url["LOGS"]["log_path"]
+
+
 
 
 '''

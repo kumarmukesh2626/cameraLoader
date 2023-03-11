@@ -93,7 +93,7 @@ class CameraLoader:
 
 
 config_Url = configparser.ConfigParser()
-config_Url.read('src/config/common_config.ini')
+config_Url.read('config/common_config.ini')
 path = config_Url["LOGS"]["log_path"]
 
 

@@ -1,11 +1,7 @@
 import time
 import cv2
-import numpy as np
-from imutils.video import FPS
-import pandas as pd
 from queue import Queue
 from threading import Thread
-import cv2
 import configparser
 from collections import deque
 from cameraLoader.fetch_config_values import MyParser

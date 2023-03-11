@@ -5,9 +5,14 @@ from PIL import Image
 import io
 import json
 import requests
+import numpy as np
+import configparser
+
+config_Url = configparser.ConfigParser()
+config_Url.read("config/common_config.ini")
+test_batch_url = config_Url["configuration"]["test_batch_url"]
 
 
-test_batch_url =  'http://localhost:5000/api/v1/objectdetection'
 video_capture = CameraLoader('config/cam_config.ini')
 video_capture.start()
 

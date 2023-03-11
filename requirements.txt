@@ -5,6 +5,11 @@ opencv-python
 pandas
 numpy==1.21.0
 imutils==0.5.4
+<<<<<<< HEAD
 pillow==9.4.0
 requests==2.28.2
+=======
+types-waitress
+types-requests
+>>>>>>> 577ea9b518a4902b2836caef4e60b1b9cb05651f
 -e .
